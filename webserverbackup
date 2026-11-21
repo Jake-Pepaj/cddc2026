@@ -5,7 +5,6 @@ DEST=/root/backups
 mkdir -p "$DEST" && chmod 700 "$DEST"
 OUT="$DEST/webserver-$TS.tar.gz"
 
-# Web content, web/ssh/firewall configs, accounts, cron, ssh keys
 tar czpf "$OUT" \
   /var/www \
   /etc/apache2 /etc/nginx /etc/httpd \
@@ -16,7 +15,6 @@ tar czpf "$OUT" \
   /root/.ssh /home/*/.ssh \
   2>/dev/null
 
-# Database dump, if one exists
 if command -v mysqldump >/dev/null 2>&1; then
   mysqldump --all-databases > "$DEST/db-$TS.sql" 2>/dev/null
 fi
